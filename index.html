@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Teacher's Day</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #ffe3f3, #fff9c4);
+    position: relative;
+    cursor: pointer;
+    animation: gradientBG 10s ease infinite alternate;
+  }
+
+  @keyframes gradientBG {
+    0% { background: linear-gradient(180deg, #ffe3f3, #fff9c4); }
+    50% { background: linear-gradient(180deg, #ffecd2, #fcb69f); }
+    100% { background: linear-gradient(180deg, #d4fc79, #96e6a1); }
+  }
+
+  .message-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(14px);
+    padding: 50px 40px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 0 20px rgba(255,255,255,0.3);
+    border: 3px dashed #ff2e63;
+    z-index: 10;
+    opacity: 0;
+    animation: fadeInBox 1s forwards 1s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .message-box:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 0 25px rgba(255,255,255,0.4);
+  }
+
+  @keyframes fadeInBox {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  .message-box h1 {
+    font-size: 28px;
+    color: #ff2e63;
+    margin-bottom: 5px;
+    text-shadow: 0 0 15px #ff2e63, 0 0 30px #ff2e63;
+    transition: text-shadow 0.3s ease;
+    animation: glowText 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowText {
+    0% { text-shadow: 0 0 15px #ff2e63, 0 0 30px #ff2e63; }
+    100% { text-shadow: 0 0 25px #ff2e63, 0 0 50px #ff2e63, 0 0 75px #ff85a1; }
+  }
+
+  .subtext {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ff6b81;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px #ff6b81, 0 0 15px #ff6b81;
+  }
+
+  .message-box p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.4;
+  }
+
+  .message-box::before,
+  .message-box::after {
+    content: '✨';
+    font-size: 24px;
+    position: absolute;
+    top: -15px;
+  }
+  .message-box::before { left: -10px; }
+  .message-box::after { right: -10px; }
+
+  .balloon {
+    position: absolute;
+    bottom: -100px;
+    pointer-events: auto;
+    z-index: 1;
+    transition: transform 0.3s ease;
+  }
+  .balloon:hover { transform: scale(1.2); }
+
+  /* Float balloons straight up */
+  @keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-120vh); opacity: 0; }
+  }
+
+  .paper { position: absolute; width: 6px; height: 12px; border-radius: 2px; z-index: 12; opacity: 0; }
+
+  .star {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: yellow;
+    border-radius: 50%;
+    opacity: 0;
+    z-index: 15;
+    animation: twinkle 2s infinite alternate;
+  }
+  @keyframes twinkle {
+    0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+    100% { opacity: 0; transform: scale(0.5) rotate(360deg); }
+  }
+
+  .heart { position: absolute; font-size: 20px; color: #ff6b81; animation: floatHeart 4s linear infinite; z-index: 12; }
+  @keyframes floatHeart {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-150px) rotate(360deg); opacity: 0; }
+  }
+
+  @media (max-width: 768px) {
+    .message-box { padding: 40px 20px; border-radius: 20px; }
+    .message-box h1 { font-size: 22px; }
+    .subtext { font-size: 12px; }
+    .message-box p { font-size: 14px; }
+  }
+  @media (max-width: 480px) {
+    .message-box { padding: 30px 15px; }
+    .message-box h1 { font-size: 20px; }
+    .subtext { font-size: 10px; }
+    .message-box p { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="message-box">
+  <h1>🎉 Happy Teacher’s Day Sir 🎉</h1>
+  <p class="subtext">Celebrating the guiding stars of our lives</p>
+  <p>“Teachers are the bridge between dreams and achievements,  
+  the light that guides us through the darkest nights.”</p>
+</div>
+
+<script>
+const balloonImages = [
+  "balloon-red.png",
+  "balloon-blue.png",
+  "balloon-green.png",
+  "balloon-yellow.png"
+];
+
+function createBalloon() {
+  const b = document.createElement("img");
+  b.src = balloonImages[Math.floor(Math.random()*balloonImages.length)];
+  b.className = "balloon";
+  const size = (window.innerWidth < 480 ? 80 : 100) + Math.random()*60;
+  b.style.width = size + "px";
+  b.style.left = Math.random()*90 + "vw";
+  // Use floatUp animation only
+  b.style.animation = `floatUp ${6 + Math.random()*4}s linear forwards`;
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(), (6 + Math.random()*4)*1000);
+}
+
+function burstPapers(){
+  const count = 80;
+  for(let i=0;i<count;i++){
+    const p = document.createElement("div");
+    p.className = "paper";
+    p.style.background = `hsl(${Math.random()*360}, 70%, 60%)`;
+    p.style.left = Math.random()*window.innerWidth + "px";
+    p.style.bottom = "-20px";
+    p.style.opacity = 1;
+    const duration = 2 + Math.random()*2;
+    const rotate = Math.random()*360;
+    p.style.transition = `transform ${duration}s ease-out, opacity ${duration}s ease-out`;
+    document.body.appendChild(p);
+    setTimeout(()=>{ p.style.transform = `translateY(-${window.innerHeight + 50}px) rotate(${rotate}deg)`; p.style.opacity = 0; }, 50);
+    setTimeout(()=>p.remove(), duration*1000);
+  }
+}
+
+function createStar() {
+  const s = document.createElement("div");
+  s.className = "star";
+  s.style.left = (window.innerWidth/2 - 100 + Math.random()*200) + "px";
+  s.style.top = (window.innerHeight/2 - 100 + Math.random()*200) + "px";
+  s.style.animationDuration = (1 + Math.random()*2) + "s";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(), 5000);
+}
+
+function createHeart() {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "💖";
+  h.style.left = (window.innerWidth/2 - 50 + Math.random()*100) + "px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(), 4000);
+}
+
+function createConfetti() {
+  const c = document.createElement("div");
+  c.style.position = "absolute";
+  c.style.width = c.style.height = Math.random()*8 + 4 + "px";
+  c.style.background = `hsl(${Math.random()*360}, 70%, 60%)`;
+  c.style.left = Math.random()*window.innerWidth + "px";
+  c.style.top = "-20px";
+  c.style.opacity = 1;
+  c.style.borderRadius = "50%";
+  c.style.zIndex = 11;
+  c.style.transition = `transform 3s linear, opacity 3s linear`;
+  document.body.appendChild(c);
+  setTimeout(()=>{
+    c.style.transform = `translateY(${window.innerHeight + 50}px) rotate(${Math.random()*720}deg)`;
+    c.style.opacity = 0;
+  }, 50);
+  setTimeout(()=>c.remove(), 3000);
+}
+
+function initialBurst(){
+  burstPapers();
+  setTimeout(burstPapers, 500);
+}
+
+function startAnimations(){
+  setInterval(createBalloon, 800);
+  setInterval(createStar, 300);
+  setInterval(createHeart, 800);
+  setInterval(createConfetti, 200);
+}
+
+window.onload = ()=>{
+  initialBurst();
+  startAnimations();
+};
+</script>
+
+</body>
+</html>
